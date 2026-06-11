@@ -142,7 +142,19 @@ function openProfile(id) {
   const cutsGrid = document.getElementById('modal-cuts');
 
   avatar.src = data.image;
-  avatar.alt = data.name;
+  avatar.alt = `${data.name}, ${data.role} at Pomade Cartel`;
+  // Show placeholder label on the avatar's parent container
+  const avatarWrap = avatar.parentElement;
+  let avatarLabel = avatarWrap.querySelector('.placeholder-label');
+  if (!avatarLabel) {
+    avatarLabel = document.createElement('span');
+    avatarLabel.className = 'placeholder-label';
+    avatarLabel.setAttribute('aria-hidden', 'true');
+    avatarLabel.style.cssText = 'font-size:0.55rem;padding:0.25rem 0.6rem;';
+    avatarWrap.style.position = 'relative';
+    avatarWrap.appendChild(avatarLabel);
+  }
+  avatarLabel.textContent = `${data.name} — portrait`;
   name.textContent = data.name;
   role.textContent = data.role;
   bio.textContent  = data.bio;
@@ -159,7 +171,10 @@ function openProfile(id) {
 
   cutsGrid.innerHTML = data.highlights.map(({ img, caption }) => `
     <div class="cut-card">
-      <img src="${img}" alt="${caption}" class="cut-card__img" loading="lazy" />
+      <div class="img-wrap">
+        <img src="${img}" alt="${caption}" class="cut-card__img" loading="lazy" />
+        <span class="placeholder-label" aria-hidden="true">${data.name} — ${caption}</span>
+      </div>
       <p class="cut-card__caption">${caption}</p>
     </div>
   `).join('');

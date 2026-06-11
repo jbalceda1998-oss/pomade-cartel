@@ -255,6 +255,41 @@ p {
   transition: var(--transition);
 }
 
+/* ── Placeholder image labels ─────────────────────────────── */
+.placeholder-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.52);
+  color: var(--gold-bright);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.45;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  max-width: 88%;
+  word-break: break-word;
+  white-space: normal;
+}
+
+/* Sig-work and cut-card images need a relative wrapper for label positioning */
+.img-wrap {
+  position: relative;
+  line-height: 0;
+}
+
+.img-wrap img {
+  display: block;
+  width: 100%;
+}
+
 /* ── Scroll Reveal ────────────────────────────────────────── */
 .reveal {
   opacity: 0;
@@ -1022,12 +1057,16 @@ p {
   gap: 0.5rem;
 }
 
+.cut-card .img-wrap {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
 .cut-card__img {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
   display: block;
 }
 
@@ -1347,12 +1386,16 @@ a.barber-card {
   margin: 0;
 }
 
+.sig-work-card .img-wrap {
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
 .sig-work-card__img {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
   display: block;
   filter: grayscale(100%);
   transition: filter 0.5s ease, transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
