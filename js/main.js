@@ -278,16 +278,18 @@ function initNav() {
 
 /* ── Before / After Slider ────────────────────────────────── */
 function initBeforeAfterSlider() {
-  const slider  = document.getElementById('ba-slider');
-  const before  = document.getElementById('ba-before');
-  const handle  = document.getElementById('ba-handle');
+  const slider = document.getElementById('ba-slider');
+  const before = document.getElementById('ba-before');
+  const handle = document.getElementById('ba-handle');
   if (!slider || !before || !handle) return;
 
-  let pos = 50; // percentage
+  let pos      = 50;
   let dragging = false;
 
-  function setPos(pct) {
+  function setPos(pct, withTransition) {
     pos = Math.min(100, Math.max(0, pct));
+    // Disable clip-path CSS transition while dragging for zero lag
+    slider.classList.toggle('dragging', !withTransition);
     before.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
     handle.style.left     = `${pos}%`;
     handle.setAttribute('aria-valuenow', Math.round(pos));
@@ -298,48 +300,51 @@ function initBeforeAfterSlider() {
     return ((clientX - rect.left) / rect.width) * 100;
   }
 
-  // Mouse
-  slider.addEventListener('mousedown', (e) => {
+  function startDrag(clientX) {
     dragging = true;
-    setPos(getPct(e.clientX));
-    e.preventDefault();
-  });
+    setPos(getPct(clientX), false);
+  }
 
-  window.addEventListener('mousemove', (e) => {
+  function moveDrag(clientX) {
     if (!dragging) return;
-    setPos(getPct(e.clientX));
-  });
+    setPos(getPct(clientX), false);
+  }
 
-  window.addEventListener('mouseup', () => { dragging = false; });
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    slider.classList.remove('dragging');
+  }
+
+  // Mouse — window listeners so dragging outside the element keeps working
+  slider.addEventListener('mousedown', (e) => { startDrag(e.clientX); e.preventDefault(); });
+  window.addEventListener('mousemove', (e) => moveDrag(e.clientX));
+  window.addEventListener('mouseup',   endDrag);
 
   // Touch
-  slider.addEventListener('touchstart', (e) => {
-    dragging = true;
-    setPos(getPct(e.touches[0].clientX));
-  }, { passive: true });
+  slider.addEventListener('touchstart',  (e) => startDrag(e.touches[0].clientX), { passive: true });
+  window.addEventListener('touchmove',   (e) => { if (dragging) moveDrag(e.touches[0].clientX); }, { passive: true });
+  window.addEventListener('touchend',    endDrag);
+  window.addEventListener('touchcancel', endDrag);
 
-  window.addEventListener('touchmove', (e) => {
-    if (!dragging) return;
-    setPos(getPct(e.touches[0].clientX));
-  }, { passive: true });
-
-  window.addEventListener('touchend', () => { dragging = false; });
-
-  // Keyboard (arrow keys on the handle)
+  // Keyboard
   handle.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft')  { setPos(pos - 2); e.preventDefault(); }
-    if (e.key === 'ArrowRight') { setPos(pos + 2); e.preventDefault(); }
+    if (e.key === 'ArrowLeft')  { setPos(pos - 2, true); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { setPos(pos + 2, true); e.preventDefault(); }
   });
 
-  // Hide hint after first interaction
+  // Hint: auto-fade after 4.2s, or immediately on first drag
   const hint = handle.querySelector('.ba-hint');
-  slider.addEventListener('mousedown',  () => { if (hint) hint.style.animation = 'none'; }, { once: true });
-  slider.addEventListener('touchstart', () => { if (hint) hint.style.animation = 'none'; }, { once: true, passive: true });
-
-  // Reduced-motion: disable the hint pulse only (slider still works)
-  if (!shouldAnimate() && hint) {
-    hint.style.animation = 'none';
-    hint.style.opacity   = '0.55';
+  if (hint) {
+    if (!shouldAnimate()) {
+      hint.style.animation = 'none';
+      hint.style.opacity   = '0';
+    } else {
+      const killHint = () => { hint.style.opacity = '0'; hint.style.animation = 'none'; };
+      setTimeout(killHint, 4200);
+      slider.addEventListener('mousedown',  killHint, { once: true });
+      slider.addEventListener('touchstart', killHint, { once: true, passive: true });
+    }
   }
 }
 
