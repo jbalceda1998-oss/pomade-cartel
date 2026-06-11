@@ -1,0 +1,305 @@
+/* ── Barber Data ──────────────────────────────────────────── */
+// TODO: Replace placeholder social URLs (#) with real barber social media links once confirmed
+const BARBERS = {
+  lard: {
+    name: 'Lard',
+    hashtag: '#GroomedByLARD',
+    role: 'Senior Barber',
+    image: 'https://placehold.co/600x800/1a1a1a/c9a227',
+    bio: 'Specialty cuts, shampoo & hairdry, quick massage, tonic services and styling with local or imported products. Book the full ₱999 / 1hr signature experience.',
+    highlights: [
+      { caption: 'Skin fade + textured top',    img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Classic taper',               img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Pompadour with tonic finish', img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+    ],
+    social: [
+      { platform: 'instagram', url: '#', label: '@barber.lard' },
+      { platform: 'tiktok',    url: '#', label: '@barber.lard' },
+    ],
+  },
+  jobie: {
+    name: 'Jobie',
+    hashtag: '#GroomedbyJOBIE',
+    role: 'Senior Barber',
+    image: 'https://placehold.co/600x800/1a1a1a/c9a227',
+    bio: 'Specialty cuts, shampoo & hairdry, tonic services, quick massage and styling with local or imported products. ₱999 / 1hr.',
+    highlights: [
+      { caption: 'Crew cut with line up',  img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Mid fade + beard trim',  img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Slick back styling',     img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+    ],
+    social: [
+      { platform: 'instagram', url: '#', label: '@barber.jobie' },
+      { platform: 'tiktok',    url: '#', label: '@barber.jobie' },
+    ],
+  },
+  fred: {
+    name: 'Fred',
+    hashtag: '#GroomedByFRED',
+    role: 'Senior Barber',
+    image: 'https://placehold.co/600x800/1a1a1a/c9a227',
+    bio: 'Specialty cuts, shampoo & hairdry, quick massage, tonic services and styling with local or imported products. ₱999 / 1hr.',
+    highlights: [
+      { caption: 'High fade + design', img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Textured quiff',     img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Classic side part',  img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+    ],
+    social: [
+      { platform: 'instagram', url: '#', label: '@barber.fred' },
+      { platform: 'tiktok',    url: '#', label: '@fredbarber26' },
+    ],
+  },
+  josh: {
+    name: 'Josh',
+    hashtag: '#GroomedByJOSH',
+    role: 'Senior Barber',
+    image: 'https://placehold.co/600x800/1a1a1a/c9a227',
+    bio: 'Specialty cuts, shampoo & hairdry, quick massage and styling with local or imported products. ₱999 / 1hr.',
+    highlights: [
+      { caption: 'Low fade + fringe', img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Buzz cut clean up', img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Modern mullet',     img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+    ],
+    social: [
+      { platform: 'instagram', url: '#', label: '@barber.josh' },
+      { platform: 'tiktok',    url: '#', label: '@barber.josh' },
+    ],
+  },
+  jc: {
+    name: 'JC',
+    hashtag: '#GroomedByJC',
+    role: 'Junior Barber',
+    image: 'https://placehold.co/600x800/1a1a1a/c9a227',
+    bio: 'Apprentice services guided by our senior barbers to assure quality. Specialty cuts, shampoo & hairdry, quick massage and styling. ₱499 / 1hr.',
+    highlights: [
+      { caption: 'Basic fade',           img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Trim & clean up',      img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+      { caption: 'Student showcase cut', img: 'https://placehold.co/450x600/1a1a1a/c9a227' },
+    ],
+    social: [
+      { platform: 'instagram', url: '#', label: '@barber.jc' },
+      { platform: 'tiktok',    url: '#', label: '@barber.jc' },
+    ],
+  },
+};
+
+/* ── Booking Modals ───────────────────────────────────────── */
+function openBookingModal() {
+  const modal = document.getElementById('booking-modal');
+  modal.removeAttribute('hidden');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('booking-modal-close').focus();
+}
+
+function closeBookingModal() {
+  document.getElementById('booking-modal').setAttribute('hidden', '');
+  document.body.style.overflow = '';
+}
+
+function openGumBookingModal() {
+  const modal = document.getElementById('gum-booking-modal');
+  modal.removeAttribute('hidden');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('gum-booking-modal-close').focus();
+}
+
+function closeGumBookingModal() {
+  document.getElementById('gum-booking-modal').setAttribute('hidden', '');
+  document.body.style.overflow = '';
+}
+
+function initBookingModals() {
+  // Close buttons
+  document.getElementById('booking-modal-close')?.addEventListener('click', closeBookingModal);
+  document.getElementById('gum-booking-modal-close')?.addEventListener('click', closeGumBookingModal);
+
+  // Backdrop click (outside the modal box)
+  document.getElementById('booking-modal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeBookingModal();
+  });
+  document.getElementById('gum-booking-modal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeGumBookingModal();
+  });
+
+  // Escape key — close whichever booking modal is open
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!document.getElementById('booking-modal')?.hasAttribute('hidden')) closeBookingModal();
+    if (!document.getElementById('gum-booking-modal')?.hasAttribute('hidden')) closeGumBookingModal();
+  });
+}
+
+/* ── Profile Modal ────────────────────────────────────────── */
+function openProfile(id) {
+  const data = BARBERS[id];
+  if (!data) return;
+
+  const modal    = document.getElementById('profile-modal');
+  const avatar   = document.getElementById('modal-avatar');
+  const name     = document.getElementById('modal-barber-name');
+  const role     = document.getElementById('modal-role');
+  const bio      = document.getElementById('modal-bio');
+  const cutsGrid = document.getElementById('modal-cuts');
+
+  avatar.src = data.image;
+  avatar.alt = data.name;
+  name.textContent = data.name;
+  role.textContent = data.role;
+  bio.textContent  = data.bio;
+
+  // Social pills
+  const socialRow = document.getElementById('modal-social');
+  socialRow.innerHTML = (data.social || []).map(({ platform, url, label }) => `
+    <a href="${url}" class="social-pill" data-platform="${platform}"
+       target="_blank" rel="noopener noreferrer" aria-label="${label} on ${platform}">
+      ${platform.charAt(0).toUpperCase() + platform.slice(1)} &#8599;
+      <span class="social-pill__handle">${label}</span>
+    </a>
+  `).join('');
+
+  cutsGrid.innerHTML = data.highlights.map(({ img, caption }) => `
+    <div class="cut-card">
+      <img src="${img}" alt="${caption}" class="cut-card__img" loading="lazy" />
+      <p class="cut-card__caption">${caption}</p>
+    </div>
+  `).join('');
+
+  modal.removeAttribute('hidden');
+  document.body.style.overflow = 'hidden';
+
+  // Return focus to close button when modal opens
+  document.getElementById('modal-close').focus();
+}
+
+function closeProfile() {
+  const modal = document.getElementById('profile-modal');
+  modal.setAttribute('hidden', '');
+  document.body.style.overflow = '';
+}
+
+function initBarbers() {
+  // Open on card click
+  document.querySelectorAll('.barber-card[data-barber]').forEach((card) => {
+    card.addEventListener('click', () => openProfile(card.dataset.barber));
+  });
+
+  // Close on × button
+  document.getElementById('modal-close')?.addEventListener('click', closeProfile);
+
+  // Close on backdrop click (outside .modal box)
+  document.getElementById('profile-modal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeProfile();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('profile-modal');
+      if (!modal?.hasAttribute('hidden')) closeProfile();
+    }
+  });
+}
+
+/* ── Scroll Reveal ────────────────────────────────────────── */
+function initReveal() {
+  const targets = document.querySelectorAll('.reveal, .reveal-group');
+
+  // For reduced-motion users, mark everything visible immediately
+  if (!shouldAnimate()) {
+    targets.forEach((el) => el.classList.add('visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  targets.forEach((el) => observer.observe(el));
+}
+
+/* ── Nav ──────────────────────────────────────────────────── */
+function initNav() {
+  const nav = document.querySelector('.nav');
+  const hamburger = document.querySelector('.nav__hamburger');
+  const links = document.querySelector('.nav__links');
+
+  // Sticky shadow on scroll
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile toggle
+  hamburger?.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close on link click
+  links?.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      hamburger?.classList.remove('open');
+      hamburger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Mark active link by current page
+  const current = location.pathname.split('/').pop() || 'index.html';
+  links?.querySelectorAll('a[href]').forEach((a) => {
+    if (a.getAttribute('href') === current) a.classList.add('active');
+  });
+}
+
+/* ── Hero Parallax ────────────────────────────────────────── */
+function initHeroParallax() {
+  // Skip on reduced-motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const parallaxEls = [
+    { el: document.querySelector('.hero__bg'),      rate: 0.4 },
+    { el: document.querySelector('.final-cta__bg'), rate: 0.25 },
+  ].filter(({ el }) => el !== null);
+
+  if (!parallaxEls.length) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      parallaxEls.forEach(({ el, rate }) => {
+        const rect = el.parentElement.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          el.style.transform = `translateY(${y * rate}px)`;
+        }
+      });
+      ticking = false;
+    });
+    ticking = true;
+  }, { passive: true });
+}
+
+/* ── Reveal: skip all if reduced-motion ──────────────────── */
+function shouldAnimate() {
+  return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/* ── Init ─────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  initNav();
+  initReveal();
+  initHeroParallax();
+  initBarbers();
+  initBookingModals();
+});

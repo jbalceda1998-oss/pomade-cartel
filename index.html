@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CORE META
+       Controls how browsers render the page and how search
+       engines index and display it in results.
+  ═══════════════════════════════════════════════════════════ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomade Cartel | Barbershop &amp; Pomade Shop in Angeles City</title>
+  <meta name="description" content="The first pomade and hair grooming one-stop shop in the Philippines. Specialty cuts, beard grooming, and hot towel shaves in Angeles City. From one gentleman to another." />
+  <meta name="keywords" content="barbershop Angeles City, pomade shop Philippines, haircut Angeles City, Pomade Cartel, Gum Cruz barber" />
+  <!-- Mobile browser UI tint colour -->
+  <meta name="theme-color" content="#c9a227" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FAVICON
+       Place a favicon.ico file at /assets/images/favicon.ico.
+       For best cross-browser support also add PNG variants
+       (favicon-32x32.png, apple-touch-icon.png) to the same
+       folder and update the hrefs below.
+       TODO: Create and add favicon files to /assets/images/
+  ═══════════════════════════════════════════════════════════ -->
+  <link rel="icon" href="/assets/images/favicon.ico" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OPEN GRAPH — SOCIAL SHARING
+       Controls the preview card shown when the URL is shared
+       on Facebook, LinkedIn, Viber, iMessage, etc.
+       TODO: Replace og:url with the real domain once deployed.
+       TODO: Replace og:image with a real 1200×630 photo/logo.
+  ═══════════════════════════════════════════════════════════ -->
+  <meta property="og:type"        content="website" />
+  <!-- TODO: add real domain URL once deployed -->
+  <!-- <meta property="og:url" content="https://pomadecartel.com/" /> -->
+  <meta property="og:title"       content="Pomade Cartel | Barbershop in Angeles City" />
+  <meta property="og:description" content="The first pomade and hair grooming one-stop shop in the Philippines. From one gentleman to another." />
+  <meta property="og:image"       content="https://placehold.co/1200x630/0d0d0d/c9a227" />
+  <!-- TODO: Replace og:image with a real branded photo (1200×630 px recommended) -->
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TWITTER / X CARD
+       Controls the preview card on Twitter/X.
+       "summary_large_image" shows a full-width image banner.
+  ═══════════════════════════════════════════════════════════ -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Pomade Cartel | Barbershop in Angeles City" />
+  <meta name="twitter:description" content="The first pomade and hair grooming one-stop shop in the Philippines. From one gentleman to another." />
+  <meta name="twitter:image"       content="https://placehold.co/1200x630/0d0d0d/c9a227" />
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FONTS & STYLES
+  ═══════════════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── Nav ─────────────────────────────────────────────── -->
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <a href="#home" class="nav__logo" aria-label="Pomade Cartel home">
+        <span class="logo-pomade">Pomade</span>&nbsp;<span class="logo-cartel">Cartel</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul class="nav__links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#barbers">Barbers</a></li>
+          <li><a href="#visit">Visit Us</a></li>
+          <li><button class="btn-book" onclick="openBookingModal()">Book Now</button></li>
+        </ul>
+      </nav>
+
+      <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+  <!-- ── End Nav ──────────────────────────────────────────── -->
+
+  <main>
+
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section class="hero" id="home" aria-label="Hero">
+      <div class="hero__bg"></div>
+      <div class="hero__overlay"></div>
+
+      <div class="container hero__content">
+        <p class="hero__eyebrow">Angeles City &middot; Est. Pomade Cartel</p>
+
+        <h1 class="hero__headline">
+          <span class="hero__line">From One</span>
+          <span class="hero__line hero__line--accent">Gentleman</span>
+          <span class="hero__line">To Another</span>
+        </h1>
+
+        <p class="hero__sub">
+          The first pomade &amp; hair grooming one&#8209;stop shop in the Philippines
+        </p>
+
+        <div class="hero__ctas">
+          <button class="btn btn--primary" onclick="openBookingModal()">Book an appointment</button>
+          <a href="#services" class="btn btn--outline">Our services</a>
+        </div>
+      </div>
+
+      <div class="hero__scroll-indicator" aria-hidden="true">
+        <div class="hero__scroll-track">
+          <div class="hero__scroll-thumb"></div>
+        </div>
+        <span class="hero__scroll-label">Scroll</span>
+      </div>
+    </section>
+    <!-- ── End Hero ──────────────────────────────────────────── -->
+
+    <!-- ── Services / The Menu ──────────────────────────────── -->
+    <section class="section services" id="services" aria-labelledby="services-title">
+      <div class="container">
+
+        <header class="section-header reveal">
+          <p class="eyebrow">What we do</p>
+          <div class="divider"></div>
+          <h2 id="services-title">The Menu</h2>
+          <p class="section-header__desc">Every service includes a consultation, so we get the cut right the first time.</p>
+        </header>
+
+        <div class="services-grid reveal-group">
+
+          <!-- Card 1 — Specialty Haircut (FEATURED) -->
+          <article class="service-card service-card--featured" aria-label="Specialty Haircut — featured service">
+            <span class="service-card__badge">Most popular</span>
+            <div class="service-card__body">
+              <div class="service-card__meta">
+                <h3 class="service-card__name">Specialty Haircut</h3>
+                <span class="service-card__duration">1 hr</span>
+              </div>
+              <p class="service-card__desc">Consultation, specialty cut, shampoo &amp; hairdry, quick massage, tonic services, and styling with local or imported products. Performed by our senior barbers.</p>
+            </div>
+            <footer class="service-card__footer">
+              <span class="price service-card__price">₱999</span>
+              <button class="service-card__cta" onclick="openBookingModal()">Book now &rarr;</button>
+            </footer>
+          </article>
+
+          <!-- Card 2 — Junior Barber Cut -->
+          <article class="service-card" aria-label="Junior Barber Cut">
+            <div class="service-card__body">
+              <div class="service-card__meta">
+                <h3 class="service-card__name">Junior Barber Cut</h3>
+                <span class="service-card__duration">1 hr &middot; supervised</span>
+              </div>
+              <p class="service-card__desc">Same full grooming experience at a friendlier price, performed by our apprentice and guided by senior barbers to assure quality.</p>
+            </div>
+            <footer class="service-card__footer">
+              <span class="price service-card__price">₱499</span>
+              <button class="service-card__cta" onclick="openBookingModal()">Book now &rarr;</button>
+            </footer>
+          </article>
+
+          <!-- Card 3 — Shave / Beard Trim -->
+          <article class="service-card" aria-label="Shave and Beard Trim">
+            <div class="service-card__body">
+              <div class="service-card__meta">
+                <h3 class="service-card__name">Shave / Beard Trim</h3>
+                <span class="service-card__duration">15 mins</span>
+              </div>
+              <p class="service-card__desc">A clean straight shave or precision beard shaping. Add it to any haircut, or book it on its own.</p>
+            </div>
+            <footer class="service-card__footer">
+              <span class="price service-card__price">₱499</span>
+              <button class="service-card__cta" onclick="openBookingModal()">Book now &rarr;</button>
+            </footer>
+          </article>
+
+        </div><!-- /.services-grid -->
+      </div>
+    </section>
+    <!-- ── End Services ──────────────────────────────────────── -->
+
+    <!-- ── Barbers / Meet The Crew ──────────────────────────── -->
+    <section class="section barbers" id="barbers" aria-labelledby="barbers-title">
+      <div class="container">
+
+        <header class="section-header reveal">
+          <p class="eyebrow">Meet the crew</p>
+          <div class="divider"></div>
+          <h2 id="barbers-title">Our Barbers</h2>
+          <p class="section-header__desc">Every chair is held by someone who takes the craft personally.</p>
+        </header>
+
+        <div class="barbers-grid reveal-group">
+
+          <button class="barber-card" data-barber="lard" aria-label="View Lard's profile">
+            <img src="https://placehold.co/600x800/1a1a1a/c9a227" alt="Lard, senior barber at Pomade Cartel" class="barber-card__photo" loading="lazy" />
+            <div class="barber-card__overlay">
+              <p class="barber-card__hashtag">#GroomedByLARD</p>
+              <h3 class="barber-card__name">Lard</h3>
+              <span class="barber-card__role">Senior Barber</span>
+              <span class="barber-card__view-btn">View profile</span>
+            </div>
+          </button>
+
+          <button class="barber-card" data-barber="jobie" aria-label="View Jobie's profile">
+            <img src="https://placehold.co/600x800/1a1a1a/c9a227" alt="Jobie, senior barber at Pomade Cartel" class="barber-card__photo" loading="lazy" />
+            <div class="barber-card__overlay">
+              <p class="barber-card__hashtag">#GroomedbyJOBIE</p>
+              <h3 class="barber-card__name">Jobie</h3>
+              <span class="barber-card__role">Senior Barber</span>
+              <span class="barber-card__view-btn">View profile</span>
+            </div>
+          </button>
+
+          <button class="barber-card" data-barber="fred" aria-label="View Fred's profile">
+            <img src="https://placehold.co/600x800/1a1a1a/c9a227" alt="Fred, senior barber at Pomade Cartel" class="barber-card__photo" loading="lazy" />
+            <div class="barber-card__overlay">
+              <p class="barber-card__hashtag">#GroomedByFRED</p>
+              <h3 class="barber-card__name">Fred</h3>
+              <span class="barber-card__role">Senior Barber</span>
+              <span class="barber-card__view-btn">View profile</span>
+            </div>
+          </button>
+
+          <button class="barber-card" data-barber="josh" aria-label="View Josh's profile">
+            <img src="https://placehold.co/600x800/1a1a1a/c9a227" alt="Josh, senior barber at Pomade Cartel" class="barber-card__photo" loading="lazy" />
+            <div class="barber-card__overlay">
+              <p class="barber-card__hashtag">#GroomedByJOSH</p>
+              <h3 class="barber-card__name">Josh</h3>
+              <span class="barber-card__role">Senior Barber</span>
+              <span class="barber-card__view-btn">View profile</span>
+            </div>
+          </button>
+
+          <button class="barber-card" data-barber="jc" aria-label="View JC's profile">
+            <img src="https://placehold.co/600x800/1a1a1a/c9a227" alt="JC, junior barber at Pomade Cartel" class="barber-card__photo" loading="lazy" />
+            <div class="barber-card__overlay">
+              <p class="barber-card__hashtag">#GroomedByJC</p>
+              <h3 class="barber-card__name">JC</h3>
+              <span class="barber-card__role">Junior Barber</span>
+              <span class="barber-card__view-btn">View profile</span>
+            </div>
+          </button>
+
+        </div><!-- /.barbers-grid -->
+
+        <div class="barbers-founder-teaser reveal">
+          <p class="barbers-founder-teaser__quote">Every chair here is trained to the standard set by founder <a href="#founder" class="barbers-founder-teaser__name">Gum Cruz</a>.</p>
+          <a href="#founder" class="barbers-founder-teaser__link">Meet the founder &rarr;</a>
+        </div>
+      </div>
+    </section>
+    <!-- ── End Barbers ───────────────────────────────────────── -->
+
+    <!-- ══════════════════════════════════════════════════════════
+         FOUNDER SECTION
+    ══════════════════════════════════════════════════════════ -->
+    <section class="founder-section" id="founder" aria-labelledby="founder-name">
+
+      <!-- a. Founder Intro ────────────────────────────────────── -->
+      <div class="section founder-intro">
+        <div class="container founder-hero__grid">
+
+          <div class="founder-hero__photo-wrap reveal">
+            <img
+              src="https://placehold.co/700x900/1a1a1a/c9a227"
+              alt="Gum Cruz, founder and master barber of Pomade Cartel"
+              class="founder-hero__photo"
+              loading="lazy"
+            />
+            <div class="founder-hero__badge">
+              <span class="founder-hero__badge-title">Founder &amp; Master Barber</span>
+            </div>
+          </div>
+
+          <div class="founder-hero__copy">
+            <p class="eyebrow reveal">The man behind the cartel</p>
+            <div class="divider reveal"></div>
+
+            <h2 class="founder-hero__name reveal" id="founder-name">
+              <span class="founder-name__line">Gum</span>
+              <span class="founder-name__line founder-name__line--accent">Cruz</span>
+            </h2>
+
+            <blockquote class="founder-hero__quote reveal">
+              &ldquo;Discipline, humility, consistency &mdash; earned through consistency, not overnight success.&rdquo;
+            </blockquote>
+
+            <div class="founder-hero__stats reveal-group">
+              <div class="founder-stat">
+                <span class="founder-stat__year">2018</span>
+                <span class="founder-stat__label">Founded Pomade Cartel</span>
+              </div>
+              <div class="founder-stat">
+                <span class="founder-stat__year">PH</span>
+                <span class="founder-stat__label">Mizutani exclusive partner</span>
+              </div>
+              <div class="founder-stat">
+                <span class="founder-stat__year">TEDx</span>
+                <span class="founder-stat__label">Speaker, 2025</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- b. Bio ─────────────────────────────────────────────── -->
+      <div class="section bio-section">
+        <div class="container">
+          <header class="section-header reveal" style="text-align:left;max-width:100%;margin-bottom:clamp(2rem,4vw,3rem);">
+            <p class="eyebrow">Who he is</p>
+            <div class="divider"></div>
+            <h3 class="bio-section__title">From The Chair<br>To The Stage</h3>
+          </header>
+          <div class="bio-section__prose reveal-group">
+            <p>Gum Cruz is widely regarded as one of the top barbers in the Philippines &mdash; a global barbering educator, TEDx speaker, creative collaborator, and industry leader elevating Filipino craftsmanship, culture, and style. He is the founder of Pomade Cartel Barbershop and Mizutani Scissors Philippines.</p>
+            <p>Whether he&rsquo;s cutting at Pomade Cartel, training a barbershop fleet, or speaking onstage at an expo, Gum brings the same attention to detail across every environment. Pomade Cartel places strong emphasis on technical barbering fundamentals and personalized service &mdash; and every barber inside the shop is trained using the same standards Gum applies to his own work.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- c. Signature Work ──────────────────────────────────── -->
+      <div class="section sig-work-section">
+        <div class="container">
+          <header class="section-header reveal" style="text-align:left;max-width:100%;margin-bottom:clamp(1.75rem,3.5vw,2.75rem);">
+            <p class="eyebrow">The craft</p>
+            <div class="divider"></div>
+            <h3 class="sig-work-section__title">Signature Work</h3>
+          </header>
+          <div class="sig-work-grid reveal-group">
+            <figure class="sig-work-card">
+              <img src="https://placehold.co/450x600/2a2a2a/e8c558" alt="Editorial fade" class="sig-work-card__img" loading="lazy" />
+              <figcaption class="sig-work-card__caption">Editorial fade</figcaption>
+            </figure>
+            <figure class="sig-work-card">
+              <img src="https://placehold.co/450x600/2a2a2a/e8c558" alt="Award-winning taper" class="sig-work-card__img" loading="lazy" />
+              <figcaption class="sig-work-card__caption">Award-winning taper</figcaption>
+            </figure>
+            <figure class="sig-work-card">
+              <img src="https://placehold.co/450x600/2a2a2a/e8c558" alt="TEDx event styling" class="sig-work-card__img" loading="lazy" />
+              <figcaption class="sig-work-card__caption">TEDx event styling</figcaption>
+            </figure>
+            <figure class="sig-work-card">
+              <img src="https://placehold.co/450x600/2a2a2a/e8c558" alt="Mizutani precision cut" class="sig-work-card__img" loading="lazy" />
+              <figcaption class="sig-work-card__caption">Mizutani precision cut</figcaption>
+            </figure>
+            <figure class="sig-work-card">
+              <img src="https://placehold.co/450x600/2a2a2a/e8c558" alt="Signature pompadour" class="sig-work-card__img" loading="lazy" />
+              <figcaption class="sig-work-card__caption">Signature pompadour</figcaption>
+            </figure>
+            <figure class="sig-work-card">
+              <img src="https://placehold.co/450x600/2a2a2a/e8c558" alt="Convention showcase cut" class="sig-work-card__img" loading="lazy" />
+              <figcaption class="sig-work-card__caption">Convention showcase cut</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- d. Timeline ────────────────────────────────────────── -->
+      <div class="section timeline-section">
+        <div class="container">
+          <header class="section-header reveal" style="text-align:left;max-width:100%;margin-bottom:clamp(2rem,4vw,3.5rem);">
+            <p class="eyebrow">The journey</p>
+            <div class="divider"></div>
+            <h3 class="timeline-section__title">Career Highlights</h3>
+          </header>
+          <ol class="timeline" aria-label="Career timeline">
+            <li class="timeline__item reveal">
+              <span class="timeline__year" aria-label="Year 2021">2021</span>
+              <div class="timeline__body">
+                <h4 class="timeline__event">Uncomplacent Barbering Seminars launched</h4>
+                <p class="timeline__desc">Started in Angeles City, expanding education and training across cities in the years that followed. Also a finalist in the Mizutani World Cutting Photo Contest (Japan) and competitor in the OP Barberworld Annual Competition (UK).</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__year" aria-label="Year 2022">2022</span>
+              <div class="timeline__body">
+                <h4 class="timeline__event">Mizutani Japan exclusive partner</h4>
+                <p class="timeline__desc">Became the exclusive Philippine partner of Mizutani Japan, and earned recognition as a finalist for Behind The Chair (USA).</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__year" aria-label="Year 2023">2023</span>
+              <div class="timeline__body">
+                <h4 class="timeline__event">Philippine Barber Convention</h4>
+                <p class="timeline__desc">Co-organized the Philippine Barber Convention in Pampanga &mdash; one of the biggest community infrastructure milestones for the local barbering scene.</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__year" aria-label="Year 2024">2024</span>
+              <div class="timeline__body">
+                <h4 class="timeline__event">First Filipino WAHL SEA Educator</h4>
+                <p class="timeline__desc">Became the first Filipino WAHL Southeast Asia educator, representing the Philippines in WAHL trainings and expo demos across Malaysia, Thailand, and beyond.</p>
+              </div>
+            </li>
+            <li class="timeline__item reveal">
+              <span class="timeline__year" aria-label="Year 2025">2025</span>
+              <div class="timeline__body">
+                <h4 class="timeline__event">TEDx Talk: &lsquo;Why I&rsquo;m Obsessed With Barbering&rsquo;</h4>
+                <p class="timeline__desc">Took the stage to share how discipline, humility, and consistency from the barber&rsquo;s chair translate into a broader philosophy of craft and growth.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- d. Press Strip ──────────────────────────────────────── -->
+      <div class="section press-section">
+        <div class="container">
+          <header class="section-header reveal">
+            <p class="eyebrow">As featured in</p>
+            <div class="divider divider--center"></div>
+            <h3 class="press-section__title">Press &amp; Recognition</h3>
+          </header>
+          <div class="press-row reveal-group" role="list">
+            <span class="press-badge" role="listitem">Esquire PH</span>
+            <span class="press-badge" role="listitem">Garage Magazine</span>
+            <span class="press-badge" role="listitem">Mizutani Japan</span>
+            <span class="press-badge" role="listitem">TEDx</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- e. Groomed By Gum services ─────────────────────────── -->
+      <div class="section gum-services">
+        <div class="container">
+          <header class="section-header reveal">
+            <p class="eyebrow">Book directly with the founder</p>
+            <div class="divider divider--center"></div>
+            <h3 class="gum-services__title">Groomed By Gum</h3>
+          </header>
+
+          <div class="services-grid reveal-group">
+
+            <article class="service-card service-card--featured" aria-label="#GroomedByGum Haircut — signature service">
+              <span class="service-card__badge">Signature</span>
+              <div class="service-card__body">
+                <div class="service-card__meta">
+                  <h4 class="service-card__name">#GroomedByGum Haircut</h4>
+                  <span class="service-card__duration">1 hr 15 min</span>
+                </div>
+                <p class="service-card__desc">Consultation, specialty cuts, shampoo, styling, tonic, lint rolling service, optional photo op, and exclusive stickers.</p>
+              </div>
+              <footer class="service-card__footer">
+                <span class="price service-card__price">&#8369;1,999</span>
+                <button class="service-card__cta" onclick="openGumBookingModal()">Book now &rarr;</button>
+              </footer>
+            </article>
+
+            <article class="service-card" aria-label="Beard Trim or Shave Only">
+              <div class="service-card__body">
+                <div class="service-card__meta">
+                  <h4 class="service-card__name">Beard Trim / Shave Only</h4>
+                  <span class="service-card__duration">1 hr</span>
+                </div>
+                <p class="service-card__desc">Precision beard trim or clean shave, finished with hot and cold towel treatment.</p>
+              </div>
+              <footer class="service-card__footer">
+                <span class="price service-card__price">&#8369;1,199</span>
+                <button class="service-card__cta" onclick="openGumBookingModal()">Book now &rarr;</button>
+              </footer>
+            </article>
+
+            <article class="service-card" aria-label="#GroomedByGum Cut and Shave">
+              <div class="service-card__body">
+                <div class="service-card__meta">
+                  <h4 class="service-card__name">#GroomedByGum Cut &amp; Shave</h4>
+                  <span class="service-card__duration">1 hr 15 min</span>
+                </div>
+                <p class="service-card__desc">The complete signature experience &mdash; full haircut paired with a precision shave.</p>
+              </div>
+              <footer class="service-card__footer">
+                <span class="price service-card__price">&#8369;2,999</span>
+                <button class="service-card__cta" onclick="openGumBookingModal()">Book now &rarr;</button>
+              </footer>
+            </article>
+
+          </div><!-- /.services-grid -->
+
+          <!-- f. Social Links ───────────────────────────────── -->
+          <div class="gum-social reveal" role="list" aria-label="Gum Cruz social links">
+            <a href="https://facebook.com/thegumcruz" class="social-pill" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="Gum Cruz on Facebook">
+              Facebook &#8599; <span class="social-pill__handle">@thegumcruz</span>
+            </a>
+            <a href="https://www.tiktok.com/@thegumcruz" class="social-pill" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="Gum Cruz on TikTok">
+              TikTok &#8599; <span class="social-pill__handle">@thegumcruz</span>
+            </a>
+            <a href="https://gumcruz.com" class="social-pill" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="Gum Cruz personal website">
+              Website &#8599; <span class="social-pill__handle">gumcruz.com</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+    <!-- ── End Founder Section ───────────────────────────────── -->
+
+    <!-- ── Visit The Shop ───────────────────────────────────── -->
+    <section class="section visit-section" id="visit" aria-labelledby="visit-title">
+      <div class="container">
+
+        <header class="section-header reveal">
+          <p class="eyebrow">Find us</p>
+          <div class="divider divider--center"></div>
+          <h2 id="visit-title">Visit The Shop</h2>
+        </header>
+
+        <div class="visit-grid reveal-group">
+
+          <!-- Storefront image -->
+          <div class="visit-photo-wrap">
+            <img
+              src="https://placehold.co/800x600/1a1a1a/c9a227"
+              alt="Pomade Cartel storefront entrance on McArthur Highway, Angeles City"
+              class="visit-photo"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Info -->
+          <div class="visit-info">
+
+            <div class="visit-block">
+              <p class="visit-block__label">
+                <span class="visit-block__icon" aria-hidden="true">&#9678;</span>
+                Address
+              </p>
+              <address class="visit-block__text">
+                Unit F, Alcon Bldg, McArthur Highway<br>
+                (Above Offwhite / Chicken Avenue)<br>
+                Angeles City, 2009
+              </address>
+            </div>
+
+            <div class="visit-block">
+              <p class="visit-block__label">
+                <span class="visit-block__icon" aria-hidden="true">&#9711;</span>
+                Hours
+              </p>
+              <dl class="visit-hours">
+                <div class="visit-hours__row">
+                  <dt>Sun</dt><dd>10 AM – 7 PM</dd>
+                </div>
+                <div class="visit-hours__row">
+                  <dt>Mon</dt><dd>10 AM – 7 PM</dd>
+                </div>
+                <div class="visit-hours__row visit-hours__row--closed">
+                  <dt>Tue</dt><dd>Closed</dd>
+                </div>
+                <div class="visit-hours__row visit-hours__row--closed">
+                  <dt>Wed</dt><dd>Closed</dd>
+                </div>
+                <div class="visit-hours__row">
+                  <dt>Thu</dt><dd>10 AM – 7 PM</dd>
+                </div>
+                <div class="visit-hours__row">
+                  <dt>Fri</dt><dd>10 AM – 7 PM</dd>
+                </div>
+                <div class="visit-hours__row">
+                  <dt>Sat</dt><dd>10 AM – 7 PM</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="visit-block">
+              <p class="visit-block__label">
+                <span class="visit-block__icon" aria-hidden="true">&#9678;</span>
+                Contact
+              </p>
+              <p class="visit-block__text">
+                +63 951 017 2776<br>
+                <a href="https://instagram.com/pomadecartel" target="_blank" rel="noopener noreferrer" class="visit-contact-link">@pomadecartel</a>
+              </p>
+            </div>
+
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Unit+f%2C+Alcon+Bldg%2C+McArthur+Highway+%28Above+Offwhite+%2F+Chicken+Avenue%29%2C+Angeles+City%2C+Abra%2C+2009"
+              class="btn btn--outline visit-directions-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Get directions to Pomade Cartel on Google Maps"
+            >
+              Get directions &rarr;
+            </a>
+
+          </div><!-- /.visit-info -->
+        </div><!-- /.visit-grid -->
+      </div>
+    </section>
+    <!-- ── End Visit ─────────────────────────────────────────── -->
+
+    <!-- ── Final CTA ─────────────────────────────────────────── -->
+    <section class="final-cta" aria-label="Book an appointment">
+      <div class="final-cta__bg" role="presentation"></div>
+      <div class="final-cta__overlay"></div>
+      <div class="container final-cta__content reveal">
+        <h2 class="final-cta__headline">
+          <span class="final-cta__line">Ready for the</span>
+          <span class="final-cta__line final-cta__line--accent">Cartel Treatment?</span>
+        </h2>
+        <button class="btn btn--primary final-cta__btn" onclick="openBookingModal()">
+          Book your seat
+        </button>
+      </div>
+    </section>
+    <!-- ── End Final CTA ─────────────────────────────────────── -->
+
+    <!-- ── Booking Modal — Pomade Cartel ────────────────────── -->
+    <div class="modal-backdrop booking-backdrop" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" hidden>
+      <div class="modal booking-modal">
+        <div class="booking-modal__header">
+          <div class="booking-modal__identity">
+            <span class="booking-modal__logo">
+              <span class="logo-pomade">Pomade</span>&nbsp;<span class="logo-cartel">Cartel</span>
+            </span>
+            <p class="booking-modal__label" id="booking-modal-title">Book your appointment</p>
+          </div>
+          <button class="modal__close" id="booking-modal-close" aria-label="Close booking">&times;</button>
+        </div>
+        <div class="booking-modal__frame-wrap">
+          <iframe
+            src="https://pomadecartel.setmore.com/"
+            scrolling="yes"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            allow="web-share; payment"
+            title="Book an appointment with Pomade Cartel"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    <!-- ── End Booking Modal ─────────────────────────────────── -->
+
+    <!-- ── Booking Modal — Groomed By Gum ────────────────────── -->
+    <div class="modal-backdrop booking-backdrop" id="gum-booking-modal" role="dialog" aria-modal="true" aria-labelledby="gum-booking-modal-title" hidden>
+      <div class="modal booking-modal">
+        <div class="booking-modal__header">
+          <div class="booking-modal__identity">
+            <span class="booking-modal__logo">
+              <span class="logo-pomade">Groomed</span>&nbsp;<span class="logo-cartel">By Gum</span>
+            </span>
+            <p class="booking-modal__label" id="gum-booking-modal-title">Book with Gum Cruz</p>
+          </div>
+          <button class="modal__close" id="gum-booking-modal-close" aria-label="Close booking">&times;</button>
+        </div>
+        <div class="booking-modal__frame-wrap">
+          <iframe
+            src="https://groomedbygum.setmore.com/"
+            scrolling="yes"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            allow="web-share; payment"
+            title="Book an appointment with Gum Cruz"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    <!-- ── End Gum Booking Modal ─────────────────────────────── -->
+
+    <!-- ── Profile Modal ─────────────────────────────────────── -->
+    <div class="modal-backdrop" id="profile-modal" role="dialog" aria-modal="true" aria-labelledby="modal-barber-name" hidden>
+      <div class="modal">
+        <button class="modal__close" id="modal-close" aria-label="Close profile">&times;</button>
+
+        <div class="modal__header">
+          <img src="" alt="" class="modal__avatar" id="modal-avatar" />
+          <div class="modal__identity">
+            <h2 class="modal__name" id="modal-barber-name"></h2>
+            <p class="modal__role" id="modal-role"></p>
+            <p class="modal__bio" id="modal-bio"></p>
+            <div class="modal__social" id="modal-social"></div>
+          </div>
+        </div>
+
+        <hr class="gold-rule" />
+
+        <div class="modal__highlights">
+          <p class="eyebrow modal__highlights-label">Recent highlights</p>
+          <div class="modal__cuts" id="modal-cuts">
+            <!-- 3 cut cards injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ── End Profile Modal ──────────────────────────────────── -->
+
+  </main>
+
+  <!-- ── Footer ────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container site-footer__inner">
+
+      <div class="footer-col">
+        <p class="footer-col__heading">Visit</p>
+        <address class="footer-col__text">
+          Unit F, Alcon Bldg<br>
+          McArthur Highway<br>
+          (Above Offwhite / Chicken Avenue)<br>
+          Angeles City, 2009
+        </address>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Unit+f%2C+Alcon+Bldg%2C+McArthur+Highway+%28Above+Offwhite+%2F+Chicken+Avenue%29%2C+Angeles+City%2C+Abra%2C+2009"
+          class="footer-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Get directions &rarr;</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col__heading">Hours</p>
+        <dl class="footer-hours">
+          <div class="footer-hours__row"><dt>Sun – Mon</dt><dd>10 AM – 7 PM</dd></div>
+          <div class="footer-hours__row footer-hours__row--closed"><dt>Tue – Wed</dt><dd>Closed</dd></div>
+          <div class="footer-hours__row"><dt>Thu – Sat</dt><dd>10 AM – 7 PM</dd></div>
+        </dl>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col__heading">Contact</p>
+        <p class="footer-col__text">
+          +63 951 017 2776<br>
+          <a href="https://instagram.com/pomadecartel" class="footer-link" target="_blank" rel="noopener noreferrer">@pomadecartel</a>
+        </p>
+        <button class="btn btn--primary footer-book-btn" onclick="openBookingModal()">Book Now</button>
+      </div>
+
+    </div>
+
+    <div class="site-footer__bottom">
+      <div class="container">
+        <p class="site-footer__tagline">&copy; Pomade Cartel &mdash; From one gentleman to another</p>
+      </div>
+    </div>
+  </footer>
+  <!-- ── End Footer ────────────────────────────────────────── -->
+
+  <script src="js/main.js"></script>
+</body>
+</html>
