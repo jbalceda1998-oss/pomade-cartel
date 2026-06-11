@@ -448,34 +448,166 @@ p {
   overflow: hidden;
 }
 
-/* ── Background + parallax ────────────────────────────────── */
-.hero__bg {
-  position: absolute;
-  inset: -15% 0;          /* extra vertical room for parallax travel */
-  background-image: url('https://placehold.co/1600x1000/111010/1a1a1a');
-  background-size: cover;
-  background-position: center;
-  will-change: transform;
-  z-index: 0;
+/* ── Before / After Slider ────────────────────────────────── */
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 1;   transform: translateX(-50%) scale(1.06); }
 }
 
-.hero__overlay {
+.ba-slider {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(13, 13, 13, 0.55) 0%,
-      rgba(13, 13, 13, 0.30) 45%,
-      rgba(13, 13, 13, 0.75) 100%
-    );
+  z-index: 0;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+  cursor: ew-resize;
+}
+
+/* Shared panel base */
+.ba-panel {
+  position: absolute;
+  inset: 0;
+}
+
+/* After panel — always full width, sits behind */
+.ba-panel--after {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
   z-index: 1;
+}
+
+/* Before panel — clipped to left portion, sits in front */
+.ba-panel--before {
+  background: linear-gradient(135deg, #3a3a3a 0%, #181818 100%);
+  clip-path: inset(0 50% 0 0);
+  z-index: 2;
+  will-change: clip-path;
+}
+
+/* Placeholder label inside panels */
+.ba-panel__placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.ba-panel--before .ba-panel__placeholder {
+  left: 25%;
+}
+
+.ba-panel--after .ba-panel__placeholder {
+  left: 75%;
+}
+
+/* Corner labels */
+.ba-label {
+  position: absolute;
+  top: calc(var(--nav-h) + 1rem);
+  z-index: 5;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: transparent;
+  border: 1px solid var(--gold);
+  padding: 0.3rem 0.75rem;
+  pointer-events: none;
+}
+
+.ba-label--before {
+  left: 1.5rem;
+}
+
+.ba-label--after {
+  right: 1.5rem;
+}
+
+/* Draggable handle */
+.ba-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: ew-resize;
+}
+
+.ba-handle__line--top,
+.ba-handle__line--bottom {
+  flex: 1;
+  width: 2px;
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(201, 162, 39, 0.6);
+}
+
+.ba-handle__btn {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: rgba(13, 13, 13, 0.85);
+  color: var(--gold);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+  box-shadow: 0 0 16px rgba(201, 162, 39, 0.4);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.ba-handle__btn:hover,
+.ba-handle:focus-within .ba-handle__btn {
+  background: rgba(201, 162, 39, 0.15);
+  box-shadow: 0 0 24px rgba(201, 162, 39, 0.6);
+}
+
+/* Drag hint */
+.ba-hint {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 230, 0.55);
+  pointer-events: none;
+  animation: hint-pulse 2s ease-in-out 1.8s infinite;
+  opacity: 0;
+}
+
+/* Bottom gradient overlay (replaces old .hero__overlay) */
+.hero__bottom-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 45%,
+    rgba(13, 13, 13, 0.8) 100%
+  );
+  z-index: 3;
+  pointer-events: none;
 }
 
 /* ── Content ──────────────────────────────────────────────── */
 .hero__content {
   position: relative;
-  z-index: 2;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -556,7 +688,7 @@ p {
   bottom: 2.5rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 2;
+  z-index: 7;
   display: flex;
   flex-direction: column;
   align-items: center;

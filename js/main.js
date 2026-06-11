@@ -276,29 +276,88 @@ function initNav() {
   });
 }
 
-/* ── Hero Parallax ────────────────────────────────────────── */
-function initHeroParallax() {
-  // Skip on reduced-motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+/* ── Before / After Slider ────────────────────────────────── */
+function initBeforeAfterSlider() {
+  const slider  = document.getElementById('ba-slider');
+  const before  = document.getElementById('ba-before');
+  const handle  = document.getElementById('ba-handle');
+  if (!slider || !before || !handle) return;
 
-  const parallaxEls = [
-    { el: document.querySelector('.hero__bg'),      rate: 0.4 },
-    { el: document.querySelector('.final-cta__bg'), rate: 0.25 },
-  ].filter(({ el }) => el !== null);
+  let pos = 50; // percentage
+  let dragging = false;
 
-  if (!parallaxEls.length) return;
+  function setPos(pct) {
+    pos = Math.min(100, Math.max(0, pct));
+    before.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
+    handle.style.left     = `${pos}%`;
+    handle.setAttribute('aria-valuenow', Math.round(pos));
+  }
+
+  function getPct(clientX) {
+    const rect = slider.getBoundingClientRect();
+    return ((clientX - rect.left) / rect.width) * 100;
+  }
+
+  // Mouse
+  slider.addEventListener('mousedown', (e) => {
+    dragging = true;
+    setPos(getPct(e.clientX));
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    setPos(getPct(e.clientX));
+  });
+
+  window.addEventListener('mouseup', () => { dragging = false; });
+
+  // Touch
+  slider.addEventListener('touchstart', (e) => {
+    dragging = true;
+    setPos(getPct(e.touches[0].clientX));
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!dragging) return;
+    setPos(getPct(e.touches[0].clientX));
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => { dragging = false; });
+
+  // Keyboard (arrow keys on the handle)
+  handle.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft')  { setPos(pos - 2); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { setPos(pos + 2); e.preventDefault(); }
+  });
+
+  // Hide hint after first interaction
+  const hint = handle.querySelector('.ba-hint');
+  slider.addEventListener('mousedown',  () => { if (hint) hint.style.animation = 'none'; }, { once: true });
+  slider.addEventListener('touchstart', () => { if (hint) hint.style.animation = 'none'; }, { once: true, passive: true });
+
+  // Reduced-motion: disable the hint pulse only (slider still works)
+  if (!shouldAnimate() && hint) {
+    hint.style.animation = 'none';
+    hint.style.opacity   = '0.55';
+  }
+}
+
+/* ── Final CTA Parallax ───────────────────────────────────── */
+function initCtaParallax() {
+  if (!shouldAnimate()) return;
+
+  const ctaBg = document.querySelector('.final-cta__bg');
+  if (!ctaBg) return;
 
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (ticking) return;
     requestAnimationFrame(() => {
-      const y = window.scrollY;
-      parallaxEls.forEach(({ el, rate }) => {
-        const rect = el.parentElement.getBoundingClientRect();
-        if (rect.bottom > 0 && rect.top < window.innerHeight) {
-          el.style.transform = `translateY(${y * rate}px)`;
-        }
-      });
+      const rect = ctaBg.parentElement.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        ctaBg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+      }
       ticking = false;
     });
     ticking = true;
@@ -314,7 +373,8 @@ function shouldAnimate() {
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initReveal();
-  initHeroParallax();
+  initBeforeAfterSlider();
+  initCtaParallax();
   initBarbers();
   initBookingModals();
 });

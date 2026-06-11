@@ -89,9 +89,39 @@
 
     <!-- ── Hero ─────────────────────────────────────────────── -->
     <section class="hero" id="home" aria-label="Hero">
-      <div class="hero__bg"></div>
-      <div class="hero__overlay"></div>
-      <span class="placeholder-label" aria-hidden="true" style="top:15%;left:50%;z-index:2;">Hero: Shop interior or team photo</span>
+
+      <!-- Before/After Slider -->
+      <!-- TODO: Replace solid color panels with real before/after haircut transformation photos.
+           The "before" image should be the BEFORE panel (currently clipped/draggable layer),
+           and "after" should be the AFTER panel (back layer). -->
+      <div class="ba-slider" id="ba-slider" role="img" aria-label="Before and after haircut comparison slider">
+
+        <!-- After panel — back layer, full width always visible -->
+        <div class="ba-panel ba-panel--after" aria-hidden="true">
+          <span class="placeholder-label ba-panel__placeholder">After: Post-cut styled finish</span>
+        </div>
+
+        <!-- Before panel — front layer, clipped left portion -->
+        <div class="ba-panel ba-panel--before" id="ba-before" aria-hidden="true">
+          <span class="placeholder-label ba-panel__placeholder">Before: Client arriving at the shop</span>
+        </div>
+
+        <!-- Corner labels -->
+        <span class="ba-label ba-label--before" aria-hidden="true">Before</span>
+        <span class="ba-label ba-label--after" aria-hidden="true">After</span>
+
+        <!-- Draggable handle -->
+        <div class="ba-handle" id="ba-handle" role="slider" aria-label="Comparison slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" tabindex="0">
+          <div class="ba-handle__line ba-handle__line--top"></div>
+          <button class="ba-handle__btn" aria-hidden="true" tabindex="-1">&#8596;</button>
+          <div class="ba-handle__line ba-handle__line--bottom"></div>
+          <span class="ba-hint" aria-hidden="true">Drag to compare</span>
+        </div>
+
+      </div><!-- /.ba-slider -->
+
+      <!-- Bottom content gradient + text overlay -->
+      <div class="hero__bottom-overlay" aria-hidden="true"></div>
 
       <div class="container hero__content">
         <p class="hero__eyebrow">Angeles City &middot; Est. Pomade Cartel</p>
