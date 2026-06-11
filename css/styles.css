@@ -943,7 +943,7 @@ p {
 }
 
 .modal-backdrop[hidden] {
-  display: none;
+  display: none !important;
 }
 
 /* ── Modal Box ────────────────────────────────────────────── */
@@ -1838,29 +1838,43 @@ a.barber-card {
 }
 
 .site-footer__inner {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(2rem, 4vw, 3.5rem);
-  padding-block: clamp(3rem, 6vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  padding-block: clamp(2rem, 4vw, 3rem);
 }
 
-.footer-col__heading {
-  font-family: var(--font-body);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
+.site-footer__logo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-decoration: none;
 }
 
-.footer-col__text {
-  font-size: 0.875rem;
+.site-footer__tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.92rem;
   font-weight: 300;
-  line-height: 1.8;
-  color: rgba(245,240,230,0.6);
-  font-style: normal;
-  margin-bottom: 1rem;
+  color: rgba(245, 240, 230, 0.5);
+  letter-spacing: 0.04em;
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.1rem;
+}
+
+.site-footer__dot {
+  color: var(--line);
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .footer-link {
@@ -1870,54 +1884,42 @@ a.barber-card {
   letter-spacing: 0.1em;
   color: var(--gold);
   transition: color var(--transition);
+  text-decoration: none;
 }
 
 .footer-link:hover { color: var(--gold-bright); }
 
-.footer-hours {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 0;
-}
-
-.footer-hours__row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.82rem;
-  font-weight: 300;
-  color: rgba(245,240,230,0.6);
-}
-
-.footer-hours__row dt {
-  font-weight: 500;
-  color: var(--cream);
-}
-
-.footer-hours__row dd { margin: 0; }
-
-.footer-hours__row--closed dt,
-.footer-hours__row--closed dd { color: rgba(245,240,230,0.28); }
-
-.footer-book-btn {
-  margin-top: 1.25rem;
-  font-size: 0.68rem;
-  padding: 0.7rem 1.5rem;
+.footer-link--book {
+  /* button reset */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .site-footer__bottom {
   border-top: 1px solid var(--line);
-  padding-block: 1.25rem;
+  padding-block: 1rem;
 }
 
-.site-footer__tagline {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.82rem;
+.site-footer__copy {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
   font-weight: 300;
-  color: rgba(245,240,230,0.35);
+  letter-spacing: 0.08em;
+  color: rgba(245, 240, 230, 0.28);
   text-align: center;
-  letter-spacing: 0.04em;
+}
+
+@media (max-width: 480px) {
+  .site-footer__dot {
+    display: none;
+  }
+
+  .site-footer__links {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
 }
 
 @media (max-width: 640px) {
