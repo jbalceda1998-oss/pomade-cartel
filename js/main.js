@@ -276,24 +276,6 @@ function initNav() {
   });
 }
 
-/* ── Hero kinetic letters ─────────────────────────────────── */
-function initHeroLetters() {
-  const el = document.querySelector('.hero__line--letters');
-  if (!el) return;
-
-  const text = el.getAttribute('aria-label') || el.textContent;
-  el.setAttribute('aria-label', text);
-
-  el.innerHTML = text
-    .split('')
-    .map((ch) =>
-      ch === ' '
-        ? ' '
-        : `<span class="hero__letter" aria-hidden="true">${ch}</span>`
-    )
-    .join('');
-}
-
 /* ── Final CTA Parallax ───────────────────────────────────── */
 function initCtaParallax() {
   if (!shouldAnimate()) return;
@@ -323,7 +305,6 @@ function shouldAnimate() {
 /* ── Init ─────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
-  initHeroLetters();
   initReveal();
   initCtaParallax();
   initBarbers();

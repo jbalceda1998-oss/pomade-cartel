@@ -497,10 +497,8 @@ p {
 
 .hero__line {
   display: block;
-  /* No base transform — initial off-screen position comes from the 'from' keyframe
-     via fill-mode: both. This keeps the base style transform-free so children
-     (hero__letter spans) have a clean compositing context for hover hit-testing. */
-  animation: hero-line-up 0.9s cubic-bezier(.16,1,.3,1) both;
+  transform: translateY(110%);
+  animation: hero-line-up 0.9s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 /* Stagger via the clip container's nth-child */
@@ -510,22 +508,6 @@ p {
 
 .hero__line--accent {
   color: var(--gold-bright);
-}
-
-/* ── Per-letter hover on GENTLEMAN ───────────────────────── */
-.hero__line--letters .hero__letter {
-  display: inline-block;
-  pointer-events: auto;
-  will-change: transform;
-  cursor: default;
-  transition:
-    transform   0.25s cubic-bezier(.34,1.56,.64,1),
-    color       0.2s ease;
-}
-
-.hero__line--letters .hero__letter:hover {
-  transform: translateY(-12px) rotate(-6deg) scale(1.08);
-  color: var(--cream);
 }
 
 /* ── Subtext ──────────────────────────────────────────────── */
@@ -1992,15 +1974,6 @@ a.barber-card {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
-  }
-
-  /* Disable letter hover animation */
-  .hero__line--letters .hero__letter {
-    transition: none !important;
-    will-change: auto !important;
-  }
-  .hero__line--letters .hero__letter:hover {
-    transform: none !important;
   }
 
   /* Scroll indicator: show it but preserve the translateX(-50%) centering */
