@@ -276,78 +276,6 @@ function initNav() {
   });
 }
 
-/* ── Before / After Slider ────────────────────────────────── */
-function initBeforeAfterSlider() {
-  const slider = document.getElementById('ba-slider');
-  const before = document.getElementById('ba-before');
-  const handle = document.getElementById('ba-handle');
-  if (!slider || !before || !handle) return;
-
-  let pos      = 50;
-  let dragging = false;
-
-  function setPos(pct, withTransition) {
-    pos = Math.min(100, Math.max(0, pct));
-    // Disable clip-path CSS transition while dragging for zero lag
-    slider.classList.toggle('dragging', !withTransition);
-    before.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
-    handle.style.left     = `${pos}%`;
-    handle.setAttribute('aria-valuenow', Math.round(pos));
-  }
-
-  function getPct(clientX) {
-    const rect = slider.getBoundingClientRect();
-    return ((clientX - rect.left) / rect.width) * 100;
-  }
-
-  function startDrag(clientX) {
-    dragging = true;
-    setPos(getPct(clientX), false);
-  }
-
-  function moveDrag(clientX) {
-    if (!dragging) return;
-    setPos(getPct(clientX), false);
-  }
-
-  function endDrag() {
-    if (!dragging) return;
-    dragging = false;
-    slider.classList.remove('dragging');
-  }
-
-  // Mouse — window listeners so dragging outside the element keeps working
-  slider.addEventListener('mousedown', (e) => { startDrag(e.clientX); e.preventDefault(); });
-  window.addEventListener('mousemove', (e) => moveDrag(e.clientX));
-  window.addEventListener('mouseup',   endDrag);
-
-  // Touch
-  slider.addEventListener('touchstart',  (e) => startDrag(e.touches[0].clientX), { passive: true });
-  window.addEventListener('touchmove',   (e) => { if (dragging) moveDrag(e.touches[0].clientX); }, { passive: true });
-  window.addEventListener('touchend',    endDrag);
-  window.addEventListener('touchcancel', endDrag);
-
-  // Keyboard
-  handle.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft')  { setPos(pos - 2, true); e.preventDefault(); }
-    if (e.key === 'ArrowRight') { setPos(pos + 2, true); e.preventDefault(); }
-  });
-
-  // Hint: auto-fade after 4.2s, or immediately on first drag
-  const hint = handle.querySelector('.ba-hint');
-  if (hint) {
-    if (!shouldAnimate()) {
-      hint.style.animation = 'none';
-      hint.style.opacity   = '0';
-    } else {
-      const killHint = () => { hint.style.opacity = '0'; hint.style.animation = 'none'; };
-      setTimeout(killHint, 4200);
-      slider.addEventListener('mousedown',  killHint, { once: true });
-      slider.addEventListener('touchstart', killHint, { once: true, passive: true });
-    }
-  }
-}
-
 /* ── Final CTA Parallax ───────────────────────────────────── */
 function initCtaParallax() {
   if (!shouldAnimate()) return;
@@ -378,7 +306,6 @@ function shouldAnimate() {
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initReveal();
-  initBeforeAfterSlider();
   initCtaParallax();
   initBarbers();
   initBookingModals();
