@@ -421,14 +421,8 @@ p {
 
 /* ── Keyframes ────────────────────────────────────────────── */
 @keyframes hero-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
 
 @keyframes scroll-thumb {
@@ -438,217 +432,35 @@ p {
   100% { transform: translateY(200%); opacity: 0; }
 }
 
-/* ── Hero Shell ───────────────────────────────────────────── */
-.hero {
-  position: relative;
-  height: 100svh;
-  min-height: 560px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* ── Before / After Slider ────────────────────────────────── */
 @keyframes hint-pulse {
   0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
   50%       { opacity: 1;   transform: translateX(-50%) scale(1.06); }
 }
 
-.ba-slider {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+/* ── Hero shell ───────────────────────────────────────────── */
+.hero {
+  background: var(--black);
+  min-height: 100svh;
+  display: flex;
+  align-items: stretch;
   overflow: hidden;
-  user-select: none;
-  touch-action: none;
-  cursor: ew-resize;
 }
 
-/* Shared panel base */
-.ba-panel {
-  position: absolute;
-  inset: 0;
+/* ── Two-column inner ─────────────────────────────────────── */
+.hero__inner {
+  display: grid;
+  grid-template-columns: 58fr 42fr;
+  width: 100%;
+  min-height: 100svh;
 }
 
-/* After panel — always full width, sits behind */
-.ba-panel--after {
-  background: url('../assets/images/after.jpg') center / cover no-repeat;
-  z-index: 1;
-}
-
-/* After panel — always full width, sits behind */
-.ba-panel--after::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(13, 13, 13, 0.38);
-  pointer-events: none;
-}
-
-/* Before panel — clipped to left portion, sits in front */
-.ba-panel--before {
-  background: url('../assets/images/before.jpg') center / cover no-repeat;
-  clip-path: inset(0 50% 0 0);
-  z-index: 2;
-  will-change: clip-path;
-  transition: clip-path 0.05s linear;
-}
-
-/* Disable transition while actively dragging (toggled via JS class) */
-.ba-slider.dragging .ba-panel--before {
-  transition: none;
-}
-
-/* Constant dark scrim on before panel too, for text contrast */
-.ba-panel--before::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(13, 13, 13, 0.38);
-  pointer-events: none;
-}
-
-/* Placeholder label inside panels */
-.ba-panel__placeholder {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.ba-panel--before .ba-panel__placeholder {
-  left: 25%;
-}
-
-.ba-panel--after .ba-panel__placeholder {
-  left: 75%;
-}
-
-/* Corner labels — bottom corners, above the content overlay */
-.ba-label {
-  position: absolute;
-  bottom: 9.5rem;
-  z-index: 5;
-  font-family: var(--font-body);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--cream);
-  background: rgba(13, 13, 13, 0.55);
-  border: 1px solid var(--gold);
-  padding: 0.3rem 0.75rem;
-  pointer-events: none;
-}
-
-.ba-label--before {
-  left: 1.5rem;
-}
-
-.ba-label--after {
-  right: 1.5rem;
-}
-
-@media (max-width: 600px) {
-  .ba-label {
-    bottom: 12rem;
-  }
-}
-
-/* Draggable handle — wide invisible hit area, thin visible line */
-.ba-handle {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  bottom: 0;
-  width: 44px;                     /* wide hit target */
-  transform: translateX(-50%);
-  z-index: 6;
+/* ── Left: text column ────────────────────────────────────── */
+.hero__text {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  cursor: ew-resize;
-  transition: none;
-}
-
-.ba-handle__line--top,
-.ba-handle__line--bottom {
-  flex: 1;
-  width: 2px;
-  background: var(--gold);
-  box-shadow: 0 0 10px rgba(201, 162, 39, 0.6);
-  pointer-events: none;
-}
-
-.ba-handle__btn {
-  flex-shrink: 0;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  background: rgba(13, 13, 13, 0.88);
-  color: var(--gold);
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  cursor: ew-resize;
-  box-shadow: 0 0 16px rgba(201, 162, 39, 0.45), 0 2px 12px rgba(0,0,0,0.6);
-  transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1), background 0.18s, box-shadow 0.18s;
-  pointer-events: none;
-}
-
-.ba-handle:hover .ba-handle__btn,
-.ba-handle:focus-within .ba-handle__btn {
-  transform: scale(1.18);
-  background: rgba(201, 162, 39, 0.18);
-  box-shadow: 0 0 28px rgba(201, 162, 39, 0.65), 0 2px 16px rgba(0,0,0,0.6);
-}
-
-/* Drag hint — positioned just below the circle button */
-.ba-hint {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: 2.6rem;         /* clears the button (half button height + gap) */
-  transform: translate(-50%, 0);
-  white-space: nowrap;
-  font-family: var(--font-body);
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(245, 240, 230, 0.6);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  animation: hint-pulse 2s ease-in-out 1.8s 3;  /* pulses 3× then stops */
-}
-
-/* Bottom gradient overlay (replaces old .hero__overlay) */
-.hero__bottom-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 45%,
-    rgba(13, 13, 13, 0.8) 100%
-  );
-  z-index: 3;
-  pointer-events: none;
-}
-
-/* ── Content ──────────────────────────────────────────────── */
-.hero__content {
-  position: relative;
-  z-index: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-  padding-top: var(--nav-h);
+  padding: calc(var(--nav-h) + 3rem) clamp(2rem, 5vw, 5rem) 3rem clamp(2rem, 6vw, 7rem);
+  background: var(--black);
 }
 
 /* ── Eyebrow ──────────────────────────────────────────────── */
@@ -660,7 +472,6 @@ p {
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 1.25rem;
-
   opacity: 0;
   animation: hero-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
 }
@@ -668,7 +479,7 @@ p {
 /* ── Headline ─────────────────────────────────────────────── */
 .hero__headline {
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-size: clamp(3.2rem, 7vw, 7.5rem);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: 0.03em;
@@ -685,27 +496,24 @@ p {
   animation: hero-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.hero__line:nth-child(1) { animation-delay: 0.38s; }
-.hero__line:nth-child(2) { animation-delay: 0.52s; }
-.hero__line:nth-child(3) { animation-delay: 0.66s; }
+.hero__line:nth-child(1) { animation-delay: 0.35s; }
+.hero__line:nth-child(2) { animation-delay: 0.5s;  }
+.hero__line:nth-child(3) { animation-delay: 0.65s; }
 
-.hero__line--accent {
-  color: var(--gold-bright);
-}
+.hero__line--accent { color: var(--gold-bright); }
 
 /* ── Subtext ──────────────────────────────────────────────── */
 .hero__sub {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  color: rgba(245, 240, 230, 0.72);
-  line-height: 1.5;
-  max-width: 480px;
-  margin-bottom: 2.5rem;
-
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: rgba(245, 240, 230, 0.7);
+  line-height: 1.55;
+  max-width: 420px;
+  margin-bottom: 2.25rem;
   opacity: 0;
-  animation: hero-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.82s forwards;
+  animation: hero-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.8s forwards;
 }
 
 /* ── CTAs ─────────────────────────────────────────────────── */
@@ -713,30 +521,24 @@ p {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-
+  margin-bottom: 3rem;
   opacity: 0;
-  animation: hero-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards;
+  animation: hero-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.98s forwards;
 }
 
-/* ── Scroll Indicator ─────────────────────────────────────── */
+/* ── Scroll indicator (inside text column) ────────────────── */
 .hero__scroll-indicator {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 7;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.6rem;
-
   opacity: 0;
-  animation: hero-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 1.3s forwards;
+  animation: hero-fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) 1.25s forwards;
 }
 
 .hero__scroll-track {
   width: 1px;
-  height: 52px;
+  height: 48px;
   background: rgba(201, 162, 39, 0.2);
   overflow: hidden;
   position: relative;
@@ -744,12 +546,11 @@ p {
 
 .hero__scroll-thumb {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 40%;
   background: var(--gold);
-  animation: scroll-thumb 1.8s cubic-bezier(0.4, 0, 0.6, 1) 1.6s infinite;
+  animation: scroll-thumb 1.8s cubic-bezier(0.4, 0, 0.6, 1) 1.5s infinite;
 }
 
 .hero__scroll-label {
@@ -758,22 +559,181 @@ p {
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(245, 240, 230, 0.4);
+  color: rgba(245, 240, 230, 0.35);
 }
 
-/* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .hero__content {
+/* ── Right: slider wrapper ────────────────────────────────── */
+.hero__slider-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 2rem) clamp(1.5rem, 3vw, 3.5rem) 2rem clamp(1rem, 2vw, 2rem);
+  background: var(--charcoal);
+  opacity: 0;
+  animation: hero-fade-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.45s forwards;
+}
+
+/* ── Before/After slider (contained) ─────────────────────── */
+.ba-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: calc(100svh - var(--nav-h) - 4rem);
+  border-radius: 12px;
+  border: 1px solid var(--gold);
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+  cursor: ew-resize;
+  box-shadow: 0 0 40px rgba(201, 162, 39, 0.08), 0 8px 48px rgba(0,0,0,0.55);
+}
+
+/* Shared panel base */
+.ba-panel {
+  position: absolute;
+  inset: 0;
+}
+
+/* After panel */
+.ba-panel--after {
+  background: url('../assets/images/after.jpg') center / cover no-repeat;
+  z-index: 1;
+}
+
+/* Before panel */
+.ba-panel--before {
+  background: url('../assets/images/before.jpg') center / cover no-repeat;
+  clip-path: inset(0 50% 0 0);
+  z-index: 2;
+  will-change: clip-path;
+  transition: clip-path 0.05s linear;
+}
+
+.ba-slider.dragging .ba-panel--before {
+  transition: none;
+}
+
+/* Corner labels — top corners of the contained slider */
+.ba-label {
+  position: absolute;
+  top: 0.9rem;
+  z-index: 5;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: rgba(13, 13, 13, 0.6);
+  border: 1px solid rgba(201, 162, 39, 0.6);
+  padding: 0.25rem 0.65rem;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.ba-label--before { left:  0.9rem; }
+.ba-label--after  { right: 0.9rem; }
+
+/* Draggable handle — 44px wide hit target */
+.ba-handle {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 44px;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: ew-resize;
+}
+
+.ba-handle__line--top,
+.ba-handle__line--bottom {
+  flex: 1;
+  width: 2px;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(201, 162, 39, 0.55);
+  pointer-events: none;
+}
+
+.ba-handle__btn {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: rgba(13, 13, 13, 0.88);
+  color: var(--gold);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+  box-shadow: 0 0 14px rgba(201, 162, 39, 0.4), 0 2px 10px rgba(0,0,0,0.6);
+  transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1), background 0.18s, box-shadow 0.18s;
+  pointer-events: none;
+}
+
+.ba-handle:hover .ba-handle__btn,
+.ba-handle:focus-within .ba-handle__btn {
+  transform: scale(1.15);
+  background: rgba(201, 162, 39, 0.16);
+  box-shadow: 0 0 24px rgba(201, 162, 39, 0.6), 0 2px 14px rgba(0,0,0,0.6);
+}
+
+/* Drag hint — just below the circle button */
+.ba-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 2.4rem;
+  transform: translate(-50%, 0);
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 230, 0.65);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  animation: hint-pulse 2s ease-in-out 1.8s 3;
+}
+
+/* ── Responsive: stack under 900px ───────────────────────── */
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero__text {
+    padding: calc(var(--nav-h) + 2.5rem) 1.5rem 2rem;
     align-items: center;
     text-align: center;
   }
 
-  .hero__sub {
-    max-width: 100%;
+  .hero__sub    { max-width: 100%; }
+  .hero__ctas   { justify-content: center; }
+
+  .hero__scroll-indicator {
+    align-items: center;
   }
 
-  .hero__ctas {
-    justify-content: center;
+  .hero__slider-wrap {
+    padding: 0 1.5rem 2.5rem;
+    background: var(--black);
+  }
+
+  .ba-slider {
+    aspect-ratio: 3 / 2;
+    max-height: 60vw;
   }
 }
 
@@ -786,6 +746,11 @@ p {
   .hero__ctas .btn {
     justify-content: center;
     width: 100%;
+  }
+
+  .ba-slider {
+    aspect-ratio: 4 / 3;
+    max-height: none;
   }
 }
 
