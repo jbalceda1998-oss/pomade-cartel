@@ -510,6 +510,17 @@ p {
   color: var(--gold-bright);
 }
 
+/* ── Per-letter hover on GENTLEMAN ───────────────────────── */
+.hero__letter {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), color 0.2s ease;
+}
+
+.hero__letter:hover {
+  transform: translateY(-12px) rotate(-6deg) scale(1.08);
+  color: var(--cream);
+}
+
 /* ── Subtext ──────────────────────────────────────────────── */
 .hero__sub {
   font-family: var(--font-serif);
@@ -1974,6 +1985,14 @@ a.barber-card {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
+  }
+
+  /* Disable per-letter hover animation */
+  .hero__letter {
+    transition: none !important;
+  }
+  .hero__letter:hover {
+    transform: none !important;
   }
 
   /* Scroll indicator: show it but preserve the translateX(-50%) centering */
