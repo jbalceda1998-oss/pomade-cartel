@@ -442,10 +442,21 @@ p {
   position: relative;
   height: 100svh;
   min-height: 560px;
-  background: var(--black);
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
+  /* Solid base + radial gold glow + faint diagonal line texture */
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 40px,
+      rgba(201, 162, 39, 0.018) 40px,
+      rgba(201, 162, 39, 0.018) 41px
+    ),
+    radial-gradient(ellipse 800px 600px at 50% 40%, rgba(201, 162, 39, 0.08), transparent 70%),
+    var(--black);
 }
 
 /* ── Content ──────────────────────────────────────────────── */
@@ -454,7 +465,8 @@ p {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: 0;
   padding-top: var(--nav-h);
 }
@@ -540,6 +552,7 @@ p {
 .hero__ctas {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 
   opacity: 0;
@@ -590,22 +603,15 @@ p {
 }
 
 /* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .hero__content {
-    align-items: center;
-    text-align: center;
+    padding-inline: 1.25rem;
   }
 
   .hero__sub {
     max-width: 100%;
   }
 
-  .hero__ctas {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
   .hero__ctas {
     flex-direction: column;
     width: 100%;
